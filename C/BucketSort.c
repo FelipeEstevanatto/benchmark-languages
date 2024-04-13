@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
-
-#define MAX 1000000
 
 // Average complexity: O(n+k)
 // Worst case complexity: O(n^2)
@@ -32,34 +31,42 @@ void bucketSort(int* array, int arraySize) {
     free(buckets);
 }
 
-int main() {
-    FILE *arquivo;
-    int* vetor = malloc(MAX * sizeof(int));
-    int tamanho = 0;
+int main(int argc, char *argv[]) {
+    // Default values
+    char filePath[256] = "../../Dataset/100k_parc_ordenado.txt";
+    size_t maxSize = 100000;
+
+    // Check if the user provided the input file
+    if (argc >= 2) {
+        strncpy(filePath, argv[1], sizeof(filePath) - 1);
+        filePath[sizeof(filePath) - 1] = '\0'; // Ensure null-termination
+    }
+
+    if (argc >= 3) {
+        maxSize = (size_t)atoi(argv[2]);
+    }
+
+    FILE *datasetFile = fopen(filePath, "r");
+
+    if (!datasetFile) {
+        fprintf(stderr, "Failed to open dataset file\n");
+        return 1;
+    }
+
+    int number;
     clock_t executionTime;
-    if (vetor == NULL) {
-        perror("Erro ao alocar memoria");
-        return 0;
+    int *numbers = malloc(maxSize * sizeof(int));
+    size_t count = 0;
+    while (fscanf(datasetFile, "%d", &number) == 1 && count < maxSize) {
+        numbers[count++] = number;
     }
-
-    arquivo = fopen("../../Dataset/dataset_non_ascending.txt", "r");
-    if (arquivo == NULL) {
-        perror("Erro ao abrir o arquivo");
-        return 0;
-    }
-
-    while (!feof(arquivo) && tamanho < MAX) {
-        fscanf(arquivo, "%d", &vetor[tamanho]);
-        tamanho++;
-    }
-
-    fclose(arquivo);
+    fclose(datasetFile);
 
     executionTime = clock();
-    bucketSort(vetor, tamanho);
+    bucketSort(numbers, maxSize);
     executionTime = clock() - executionTime;
-    printf("Tempo de execucao: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    printf("Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
 
-    free(vetor);
+    free(numbers);
     return 0;
 }

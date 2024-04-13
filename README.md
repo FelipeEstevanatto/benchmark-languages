@@ -24,6 +24,6 @@ Versão do Java: “22” 2024-03-19
 
 Rodar pelo menos 3 vezes cada algoritmo com cada entrada
 comando pra loopar o executável
-for /L %i in (1,1,10) do nomeexecutavel
+for /L %i in (1,1,10) do nomeexecutavel "entrada.txt" 10000
 
 Para os algoritmos em C e Java, iremos testar compilando o código com as flags de otimização -O0, e -Ofast para ver a diferença de desempenho.

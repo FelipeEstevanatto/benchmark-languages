@@ -1,37 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
-
-#define MAX 1000000
 
 // Average complexity: O(n^2)
 // Worst case complexity: O(n^2)
 
-int main() {
-    FILE *arquivo;
-    int* array = malloc(MAX * sizeof(int));
-    int arraySize = 0;
-    clock_t executionTime;
-    if (array == NULL) {
-        perror("Erro ao alocar memoria");
-        return 0;
-    }
-
-    arquivo = fopen("../../Dataset/dataset_95_sorted.txt", "r");
-    if (arquivo == NULL) {
-        perror("Erro ao abrir o arquivo");
-        return 0;
-    }
-
-    while (!feof(arquivo) && arraySize < MAX) {
-        fscanf(arquivo, "%d", &array[arraySize]);
-        arraySize++;
-    }
-
-    fclose(arquivo);
-
-    executionTime = clock();
-    executionTime = clock();
+void insertionSort(int* array, int arraySize) {
     int currentIndex, currentValue;
     for (int sortedIndex = 1; sortedIndex < arraySize; sortedIndex++) {
         currentIndex = sortedIndex - 1;
@@ -43,10 +18,44 @@ int main() {
         }
         array[currentIndex + 1] = currentValue;
     }
+}
 
+int main(int argc, char *argv[]) {
+    // Default values
+    char filePath[256] = "../../Dataset/100k_parc_ordenado.txt";
+    size_t maxSize = 100000;
+
+    // Check if the user provided the input file
+    if (argc >= 2) {
+        strncpy(filePath, argv[1], sizeof(filePath) - 1);
+        filePath[sizeof(filePath) - 1] = '\0'; // Ensure null-termination
+    }
+
+    if (argc >= 3) {
+        maxSize = (size_t)atoi(argv[2]);
+    }
+
+    FILE *datasetFile = fopen(filePath, "r");
+
+    if (!datasetFile) {
+        fprintf(stderr, "Failed to open dataset file\n");
+        return 1;
+    }
+
+    int number;
+    clock_t executionTime;
+    int *numbers = malloc(maxSize * sizeof(int));
+    size_t count = 0;
+    while (fscanf(datasetFile, "%d", &number) == 1 && count < maxSize) {
+        numbers[count++] = number;
+    }
+    fclose(datasetFile);
+
+    executionTime = clock();
+    insertionSort(numbers, maxSize);
     executionTime = clock() - executionTime;
-    printf("Tempo de execucao: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    printf("Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
     
-    free(array);
+    free(numbers);
     return 0;
 }

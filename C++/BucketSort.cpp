@@ -58,29 +58,46 @@ std::vector<int> BucketSort(const std::vector<int>& inputVector) {
     return sortedVector;
 }
 
-int main() {
-    // Ler dados do arquivo
-    std::ifstream datasetFile("../../Dataset/100k_parc_ordenado.txt");
+int main(int argc, char *argv[]) {
+    // Default values
+    std::string filePath = "../../Dataset/100k_parc_ordenado.txt";
+    size_t maxSize = 100000;
+
+    // Check if the user provided the input file
+    if (argc >= 2) {
+        filePath = argv[1];
+    }
+
+    if (argc >= 3) {
+        maxSize = std::stoi(argv[2]);
+    }
+
+    std::ifstream datasetFile(filePath);
+
     if (!datasetFile) {
-        std::cerr << "Failed to open file" << std::endl;
+        std::cerr << "Failed to open dataset file" << std::endl;
         return 1;
     }
+    
     int number;
-    std::vector<int> vetor;
+    std::vector<int> numbers;
     while (datasetFile >> number) {
-        vetor.push_back(number);
+        numbers.push_back(number);
+        if (numbers.size() == maxSize) {
+            break;
+        }
     }
     datasetFile.close();
 
-    // Ordenar vetor usando Bucket Sort
+    // Ordenar numbers usando Bucket Sort
     auto startTime = std::chrono::high_resolution_clock::now();
 
-    std::vector<int> result = BucketSort(vetor);
+    std::vector<int> result = BucketSort(numbers);
 
     auto endTime = std::chrono::high_resolution_clock::now();
 
-    // Exibir vetor ordenado
-    // std::cout << "Vetor Ordenado:" << std::endl;
+    // Exibir numbers ordenado
+    // std::cout << "numbers Ordenado:" << std::endl;
     // for (int i = 0; i < result.size(); i++) {
     //     std::cout << result[i] << " ";
     // }

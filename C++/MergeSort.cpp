@@ -53,25 +53,42 @@ std::vector<int> MergeSort(std::vector<int>& inputVector) {
 }
 
 
-int main() {
-    // Ler dados do arquivo
-    std::ifstream datasetFile("../../Dataset/100k_parc_ordenado.txt");
+int main(int argc, char *argv[]) {
+    // Default values
+    std::string filePath = "../../Dataset/100k_parc_ordenado.txt";
+    size_t maxSize = 100000;
+
+    // Check if the user provided the input file
+    if (argc >= 2) {
+        filePath = argv[1];
+    }
+
+    if (argc >= 3) {
+        maxSize = std::stoi(argv[2]);
+    }
+
+    std::ifstream datasetFile(filePath);
+
     if (!datasetFile) {
-        std::cerr << "Failed to open file" << std::endl;
+        std::cerr << "Failed to open dataset file" << std::endl;
         return 1;
     }
+    
     int number;
-    std::vector<int> vector;
+    std::vector<int> numbers;
     while (datasetFile >> number) {
-        vector.push_back(number);
+        numbers.push_back(number);
+        if (numbers.size() == maxSize) {
+            break;
+        }
     }
     datasetFile.close();
 
-	std::vector <int> ordered;
+	std::vector<int> ordered;
 
 	auto startTime = std::chrono::high_resolution_clock::now();
 
-	ordered = MergeSort(vector);
+	ordered = MergeSort(numbers);
 
 	auto endTime = std::chrono::high_resolution_clock::now();
 

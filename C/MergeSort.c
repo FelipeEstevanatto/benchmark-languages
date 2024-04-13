@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
-#define MAX 1000000
+#include <string.h>
 
 // Average complexity: O(nlog(n))
 // Worst complexity: O(nlog(n))
@@ -14,13 +13,8 @@ void merge(int* array, int left, int middle, int right) {
     int* leftArray = malloc(leftSize * sizeof(int));
     int* rightArray = malloc(rightSize * sizeof(int));
 
-    for (int i = 0; i < leftSize; i++) {
-        leftArray[i] = array[left + i];
-    }
-
-    for (int i = 0; i < rightSize; i++) {
-        rightArray[i] = array[middle + 1 + i];
-    }
+    memcpy(leftArray, &array[left], leftSize * sizeof(int));
+    memcpy(rightArray, &array[middle + 1], rightSize * sizeof(int));
 
     int leftIndex = 0;
     int rightIndex = 0;
@@ -64,34 +58,59 @@ void mergeSort(int* array, int left, int right) {
     }
 }
 
-int main() {
-    FILE *arquivo;
-    int* vetor = malloc(MAX * sizeof(int));
-    int tamanho = 0;
+void writeResult(clock_t executionTime, char* fileName) {
+    FILE *resultsFile;
+    resultsFile = fopen("../../Results/MergeSort.txt", "a");
+    if (resultsFile == NULL) {
+        perror("Erro ao abrir o resultsFile");
+        return;
+    }
+
+    char *name = strrchr(fileName, '/');
+    fprintf(resultsFile, "MergeSort - File: %s\n", name);
+    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    fclose(resultsFile);
+}
+
+int main(int argc, char *argv[]) {
+    // Default values
+    char filePath[256] = "../../Dataset/100k_parc_ordenado.txt";
+    size_t maxSize = 100000;
+
+    // Check if the user provided the input file
+    if (argc >= 2) {
+        strncpy(filePath, argv[1], sizeof(filePath) - 1);
+        filePath[sizeof(filePath) - 1] = '\0'; // Ensure null-termination
+    }
+
+    if (argc >= 3) {
+        maxSize = (size_t)atoi(argv[2]);
+    }
+
+    FILE *datasetFile = fopen(filePath, "r");
+
+    if (!datasetFile) {
+        fprintf(stderr, "Failed to open dataset file\n");
+        return 1;
+    }
+
+    int number;
     clock_t executionTime;
-    if (vetor == NULL) {
-        perror("Erro ao alocar memoria");
-        return 0;
-    }
+    int *numbers = malloc(maxSize * sizeof(int));
 
-    arquivo = fopen("../../Dataset/dataset_non_ascending.txt", "r");
-    if (arquivo == NULL) {
-        perror("Erro ao abrir o arquivo");
-        return 0;
+    size_t count = 0;
+    while (fscanf(datasetFile, "%d", &number) == 1 && count < maxSize) {
+        numbers[count++] = number;
     }
-
-    while (!feof(arquivo) && tamanho < MAX) {
-        fscanf(arquivo, "%d", &vetor[tamanho]);
-        tamanho++;
-    }
-
-    fclose(arquivo);
+    fclose(datasetFile);
 
     executionTime = clock();
-    mergeSort(vetor, 0, tamanho - 1);
+    mergeSort(numbers, 0, maxSize - 1);
     executionTime = clock() - executionTime;
-    printf("Tempo de execucao: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    printf("Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
 
-    free(vetor);
+    writeResult(executionTime, filePath);
+
+    free(numbers);
     return 0;
 }
