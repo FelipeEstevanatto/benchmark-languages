@@ -12,44 +12,51 @@ import java.io.FileNotFoundException;
 // Worst case complexity: O(n^2)
 
 public class InsertionSort {
-
-    private static final int MAX_SIZE = 1000000;
-
-    public static void main(String args[]) {
-        String fileName = "dataset_95_sorted.txt";
-        if (args.length != 0) {
-            fileName = args[0];
-        }
-
+    public static int[] readDataset(String filePath, int maxSize) {
+        Scanner datasetFile;
         try {
-            int[] dataset = readDataset(fileName);
-
-            long startTime = System.currentTimeMillis();
-            insertionSort(dataset);
-            long endTime = System.currentTimeMillis();
-
-            long elapsedTime = endTime - startTime;
-
-            System.out.println("Elapsed time: " + elapsedTime + " miliseconds");
+            datasetFile = new Scanner(new File(filePath));
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.err.println("Failed to open dataset file");
+            return null;
         }
+
+        int[] numbers = new int[maxSize];
+        int index = 0;
+        while (datasetFile.hasNextInt() && index < maxSize) {
+            numbers[index++] = datasetFile.nextInt();
+        }
+        datasetFile.close();
+
+        return numbers;
     }
 
-    // Read txt file (integers separated by new space)
-    public static int[] readDataset(String filename) throws FileNotFoundException {
-        File file = new File(filename);
-        Scanner scanner = new Scanner(file);
-        List<Integer> numbers = new ArrayList<>();
-        while (scanner.hasNext()) {
-            if (numbers.size() == MAX_SIZE) {
-                break;
-            }
-            numbers.add(scanner.nextInt());
+    public static void main(String args[]) {
+        // Default values
+        String filePath = "../Dataset/100k_parc_ordenado.txt";
+        int maxSize = 100000;
+
+        // Check if the user provided the input file
+        if (args.length >= 1) {
+            filePath = args[0];
         }
-        scanner.close();
-        return numbers.stream().mapToInt(i -> i).toArray();
+
+        if (args.length >= 2) {
+            maxSize = Integer.parseInt(args[1]);
+        }
+
+        int[] numbers = readDataset(filePath, maxSize);
+        if (numbers == null) {
+            return;
+        }
+
+        long startTime = System.currentTimeMillis();
+        insertionSort(numbers);
+        long endTime = System.currentTimeMillis();
+
+        long elapsedTime = endTime - startTime;
+
+        System.out.println("Elapsed time: " + elapsedTime + " miliseconds");
     }
 
     public static void insertionSort(int[] numbers) {
