@@ -32,6 +32,7 @@ public class MergeSort {
     public static void main(String args[]) {
         // Default values
         String filePath = "../Dataset/1000k_parc_ordenado.txt";
+        String resultPath = "../Results/MergeSort.txt";
         int maxSize = 1000000;
 
         // Check if the user provided the input file
@@ -40,7 +41,11 @@ public class MergeSort {
         }
 
         if (args.length >= 2) {
-            maxSize = Integer.parseInt(args[1]);
+            resultPath = args[1];
+        }
+
+        if (args.length >= 3) {
+            maxSize = Integer.parseInt(args[2]);
         }
 
         int[] numbers = readDataset(filePath, maxSize);
@@ -56,7 +61,7 @@ public class MergeSort {
 
         System.out.println("Elapsed time: " + elapsedTime + " miliseconds");
 
-        writeResult(elapsedTime, filePath);
+        writeResult(elapsedTime, filePath, resultPath);
     }
 
     public static void mergeSort(int[] list) {
@@ -102,8 +107,8 @@ public class MergeSort {
         }
     }
 
-    public static void writeResult(long executionTime, String fileName) {
-        File resultsFile = new File("../Results/MergeSort.txt");
+    public static void writeResult(long executionTime, String fileName, String resultPath) {
+        File resultsFile = new File(resultPath);
         PrintWriter writer;
         try {
             writer = new PrintWriter(new FileOutputStream(resultsFile, true)); // true for append mode

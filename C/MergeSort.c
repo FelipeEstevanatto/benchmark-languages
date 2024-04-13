@@ -58,9 +58,9 @@ void mergeSort(int* array, int left, int right) {
     }
 }
 
-void writeResult(clock_t executionTime, char* fileName) {
+void writeResult(clock_t executionTime, char* fileName, char* resultPath) {
     FILE *resultsFile;
-    resultsFile = fopen("../../Results/MergeSort.txt", "a");
+    resultsFile = fopen(resultPath, "a");
     if (resultsFile == NULL) {
         perror("Erro ao abrir o resultsFile");
         return;
@@ -75,6 +75,7 @@ void writeResult(clock_t executionTime, char* fileName) {
 int main(int argc, char *argv[]) {
     // Default values
     char filePath[256] = "../../Dataset/100k_parc_ordenado.txt";
+    char resultPath[256] = "../../Results/MergeSort.txt";
     size_t maxSize = 100000;
 
     // Check if the user provided the input file
@@ -84,7 +85,12 @@ int main(int argc, char *argv[]) {
     }
 
     if (argc >= 3) {
-        maxSize = (size_t)atoi(argv[2]);
+        strncpy(resultPath, argv[2], sizeof(resultPath) - 1);
+        resultPath[sizeof(resultPath) - 1] = '\0'; // Ensure null-termination
+    }
+
+    if (argc >= 4) {
+        maxSize = (size_t)atoi(argv[3]);
     }
 
     FILE *datasetFile = fopen(filePath, "r");
@@ -109,7 +115,7 @@ int main(int argc, char *argv[]) {
     executionTime = clock() - executionTime;
     printf("Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
 
-    writeResult(executionTime, filePath);
+    writeResult(executionTime, filePath, resultPath);
 
     free(numbers);
     return 0;

@@ -34,6 +34,7 @@ public class InsertionSort {
     public static void main(String args[]) {
         // Default values
         String filePath = "../Dataset/1000k_parc_ordenado.txt";
+        String resultPath = "../Results/InsertionSort.txt";
         int maxSize = 1000000;
 
         // Check if the user provided the input file
@@ -42,7 +43,11 @@ public class InsertionSort {
         }
 
         if (args.length >= 2) {
-            maxSize = Integer.parseInt(args[1]);
+            resultPath = args[1];
+        }
+
+        if (args.length >= 3) {
+            maxSize = Integer.parseInt(args[2]);
         }
 
         int[] numbers = readDataset(filePath, maxSize);
@@ -58,7 +63,7 @@ public class InsertionSort {
 
         System.out.println("Elapsed time: " + elapsedTime + " miliseconds");
 
-        writeResult(elapsedTime, filePath);
+        writeResult(elapsedTime, filePath, resultPath);
     }
 
     public static void insertionSort(int[] numbers) {
@@ -73,8 +78,8 @@ public class InsertionSort {
         }
     }
 
-    public static void writeResult(long executionTime, String fileName) {
-        File resultsFile = new File("../Results/InsertionSort.txt");
+    public static void writeResult(long executionTime, String fileName, String resultPath) {
+        File resultsFile = new File(resultPath);
         PrintWriter writer;
         try {
             writer = new PrintWriter(new FileOutputStream(resultsFile, true)); // true for append mode

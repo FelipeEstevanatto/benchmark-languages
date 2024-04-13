@@ -52,16 +52,16 @@ std::vector<int> MergeSort(std::vector<int>& inputVector) {
     return Merge(MergeSort(leftHalf), MergeSort(rightHalf));
 }
 
-void writeResult(clock_t executionTime, char* fileName) {
+void writeResult(clock_t executionTime, char* fileName, char* resultPath) {
     FILE *resultsFile;
-    resultsFile = fopen("../../Results/MergeSort.txt", "a");
+    resultsFile = fopen(resultPath, "a");
     if (resultsFile == NULL) {
         perror("Erro ao abrir o resultsFile");
         return;
     }
 
     char *name = strrchr(fileName, '/');
-    fprintf(resultsFile, "C++ - MergeSort - File: %s\n", name);
+    fprintf(resultsFile, "C - MergeSort - File: %s\n", name);
     fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
     fclose(resultsFile);
 }
@@ -69,6 +69,8 @@ void writeResult(clock_t executionTime, char* fileName) {
 int main(int argc, char *argv[]) {
     // Default values
     std::string filePath = "../../Dataset/1000k_parc_ordenado.txt";
+    std::string resultPath = "../../Results/MergeSort.txt";
+
     size_t maxSize = 1000000;
 
     // Check if the user provided the input file
@@ -77,7 +79,11 @@ int main(int argc, char *argv[]) {
     }
 
     if (argc >= 3) {
-        maxSize = std::stoi(argv[2]);
+        resultPath = argv[2];
+    }
+
+    if (argc >= 4) {
+        maxSize = std::stoi(argv[3]);
     }
 
     std::ifstream datasetFile(filePath);
@@ -114,7 +120,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Execution time: " << executionTime.count() << " microseconds" << std::endl;
 
-	writeResult(executionTime, filePath);
+    writeResult(executionTime, filePath, resultPath);
 
 	return 0;
 }
