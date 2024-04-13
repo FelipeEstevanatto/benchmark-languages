@@ -4,88 +4,90 @@
 #include <algorithm>
 #include <chrono>
 
-// Função para ordenar um vetor usando o algoritmo Quick Sort
-void quickSort(std::vector<int>& vetor, int inicio, int fim) {
-    if (inicio < fim) {
-        int pivo = vetor[fim];
-        int i = inicio - 1;
+// Function to sort a vector using the Quick Sort algorithm
+void quickSort(std::vector<int>& inputVector, int start, int end) {
+    if (start < end) {
+        int pivot = inputVector[end];
+        int smallerElementIndex = start - 1;
 
-        for (int j = inicio; j < fim; j++) {
-            if (vetor[j] <= pivo) {
-                i++;
-                std::swap(vetor[i], vetor[j]);
+        for (int currentIndex = start; currentIndex < end; currentIndex++) {
+            if (inputVector[currentIndex] <= pivot) {
+                smallerElementIndex++;
+                std::swap(inputVector[smallerElementIndex], inputVector[currentIndex]);
             }
         }
-        std::swap(vetor[i + 1], vetor[fim]);
+        std::swap(inputVector[smallerElementIndex + 1], inputVector[end]);
 
-        int indice_pivo = i + 1;
-        quickSort(vetor, inicio, indice_pivo - 1);
-        quickSort(vetor, indice_pivo + 1, fim);
+        int pivotIndex = smallerElementIndex + 1;
+        quickSort(inputVector, start, pivotIndex - 1);
+        quickSort(inputVector, pivotIndex + 1, end);
     }
 }
 
-// Função de Bucket Sort
-std::vector<int> BucketSort(const std::vector<int>& vet) {
+// Bucket Sort function
+std::vector<int> BucketSort(const std::vector<int>& inputVector) {
 
+    int maxValue = *std::max_element(inputVector.begin(), inputVector.end());
+    int minValue = *std::min_element(inputVector.begin(), inputVector.end());
 
-    int maior = *std::max_element(vet.begin(), vet.end());
-    int menor = *std::min_element(vet.begin(), vet.end());
+    // Determine the number of buckets
+    int bucketCount = (maxValue - minValue) / 10 + 1;
 
-    // Determinar o número de baldes
-    int numBaldes = (maior - menor) / 10 + 1;
+    // Create buckets
+    std::vector<std::vector<int>> buckets(bucketCount);
 
-    // Criar baldes
-    std::vector<std::vector<int>> baldes(numBaldes);
-
-    // Distribuir elementos nos baldes
-    for (int i = 0; i < vet.size(); i++) {
-        int indice = (vet[i] - menor) / 10;
-        baldes[indice].push_back(vet[i]);
+    // Distribute elements into buckets
+    for (int i = 0; i < inputVector.size(); i++) {
+        int bucketIndex = (inputVector[i] - minValue) / 10;
+        buckets[bucketIndex].push_back(inputVector[i]);
     }
 
-    // Ordenar elementos em cada balde usando o Quick Sort
-    for (int i = 0; i < baldes.size(); i++) {
-        quickSort(baldes[i], 0, baldes[i].size() - 1);
+    // Sort elements in each bucket using Quick Sort
+    for (int i = 0; i < buckets.size(); i++) {
+        quickSort(buckets[i], 0, buckets[i].size() - 1);
     }
 
-    // Concatenar baldes ordenados em um único vetor
-    std::vector<int> resultado;
-    for (int i = 0; i < baldes.size(); i++) {
-        for (int j = 0; j < baldes[i].size(); j++) {
-            resultado.push_back(baldes[i][j]);
+    // Concatenate sorted buckets into a single vector
+    std::vector<int> sortedVector;
+    for (int i = 0; i < buckets.size(); i++) {
+        for (int j = 0; j < buckets[i].size(); j++) {
+            sortedVector.push_back(buckets[i][j]);
         }
     }
 
-    return resultado;
+    return sortedVector;
 }
 
 int main() {
     // Ler dados do arquivo
-    std::ifstream arquivo("../Dataset/decreasing_1M.txt");
-    int numero;
-    std::vector<int> vetor;
-    while (arquivo >> numero) {
-        vetor.push_back(numero);
+    std::ifstream datasetFile("../../Dataset/100k_parc_ordenado.txt");
+    if (!datasetFile) {
+        std::cerr << "Failed to open file" << std::endl;
+        return 1;
     }
-    arquivo.close();
+    int number;
+    std::vector<int> vetor;
+    while (datasetFile >> number) {
+        vetor.push_back(number);
+    }
+    datasetFile.close();
 
     // Ordenar vetor usando Bucket Sort
+    auto startTime = std::chrono::high_resolution_clock::now();
 
-    auto inicio = std::chrono::high_resolution_clock::now();
+    std::vector<int> result = BucketSort(vetor);
 
-    std::vector<int> resultado = BucketSort(vetor);
-
-    auto fim = std::chrono::high_resolution_clock::now();
+    auto endTime = std::chrono::high_resolution_clock::now();
 
     // Exibir vetor ordenado
-    std::cout << "Vetor Ordenado:" << std::endl;
-    for (int i = 0; i < resultado.size(); i++) {
-        std::cout << resultado[i] << " ";
-    }
-    std::cout << std::endl;
+    // std::cout << "Vetor Ordenado:" << std::endl;
+    // for (int i = 0; i < result.size(); i++) {
+    //     std::cout << result[i] << " ";
+    // }
+    // std::cout << std::endl;
 
-    auto duracao = std::chrono::duration_cast<std::chrono::microseconds>(fim - inicio);
-    std::cout << "Tempo de execução: " << duracao.count() << " microsegundos" << std::endl;
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+    std::cout << "Execution time: " << executionTime.count() << " microseconds" << std::endl;
 
     return 0;
 }

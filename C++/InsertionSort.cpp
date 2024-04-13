@@ -4,60 +4,45 @@
 #include <vector>
 #include <chrono>
 
-void InsertioSort(std::vector<int> vet, int tam){
+void InsertionSort(std::vector<int>& numbers, int arraySize){
+    int currentIndex, previousIndex;
 
-  auto inicio = std::chrono::high_resolution_clock::now();
-
-  int i,j;
-
-  for(i = 1; i<tam; i++){
-    j = i - 1;
-    while(j>=0 && vet[j+1] < vet[j]){
-      int aux = vet[j];
-      vet[j] = vet[j+1];
-      vet[j+1] = aux;
-      j--;
-      //std::cout<<"trocou";
+    for(currentIndex = 1; currentIndex < arraySize; currentIndex++){
+        previousIndex = currentIndex - 1;
+        while(previousIndex >= 0 && numbers[previousIndex+1] < numbers[previousIndex]){
+            int temp = numbers[previousIndex];
+            numbers[previousIndex] = numbers[previousIndex+1];
+            numbers[previousIndex+1] = temp;
+            previousIndex--;
+        }
     }
-  }
 
-    auto fim = std::chrono::high_resolution_clock::now();
-
-    auto duracao = std::chrono::duration_cast<std::chrono::seconds>(fim - inicio);
-
-
-    std::cout << "Tempo de execução: " << duracao.count() << " microssegundos" << std::endl;
-
-
-  for (i = 0; i < tam; i++) {
-      std::cout << vet[i] << " ";
-  }
-  std::cout << std::endl;
-
-
+    // for (currentIndex = 0; currentIndex < arraySize; currentIndex++) {
+    //     std::cout << numbers[currentIndex] << " ";
+    // }
+    // std::cout << std::endl;
 }
 
 int main() {
-
-  std::vector<int> vet;
-
-  std::ifstream arquivo("../Dataset/dataset_95_sorted.txt");
-  std::string palavra;
-
-  if(arquivo.is_open()){
-    while(arquivo >> palavra){
-
-        //std::cout<<palavra <<std::endl;
-        int numero =  std::stoi(palavra);
-        vet.push_back(numero);
+    // Ler dados do arquivo
+    std::ifstream datasetFile("../../Dataset/100k_parc_ordenado.txt");
+    if (!datasetFile) {
+        std::cerr << "Failed to open file" << std::endl;
+        return 1;
     }
-    arquivo.close();
-  }else{
-    std::cout<<"arquivo não foi aberto"<<std::endl;
-  }
+    int number;
+    std::vector<int> vector;
+    while (datasetFile >> number) {
+        vector.push_back(number);
+    }
+    datasetFile.close();
 
-  InsertioSort(vet, 1000000);
+    auto startTime = std::chrono::high_resolution_clock::now();
+    InsertionSort(vector, 100000);
+    auto endTime = std::chrono::high_resolution_clock::now();
 
-  return 0;
+    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+    std::cout << "Execution time: " << executionTime.count() << " microseconds" << std::endl;
 
+    return 0;
 }

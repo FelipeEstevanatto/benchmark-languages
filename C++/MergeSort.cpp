@@ -4,109 +4,85 @@
 #include <vector>
 #include <chrono>
 
+std::vector<int> Merge(std::vector<int> left, std::vector<int> right) {
+    int leftSize = left.size();
+    int rightSize = right.size();
 
-std::vector <int> Mescla(std::vector <int> esq, std::vector <int> dir){
+    std::vector<int> merged; // Initializes an empty vector to store the merged result
 
-    int tamEsq = esq.size();
-    int tamDir = dir.size();
+    int leftIndex = 0, rightIndex = 0; // leftIndex for left vector, rightIndex for right vector
 
-    std::vector <int> ordenado;//inicia um vetor com o tamanho dos dois subvetores somados
-
-    int ie = 0, jd = 0;// i(esq), j(dir), k(ordenado)
-
-    while( ie < tamEsq && jd < tamDir){
-        if(esq[ie] <= dir[jd]){
-            ordenado.push_back(esq[ie]);
-            ie++;
-        }
-        else{
-            ordenado.push_back(dir[jd]);
-            jd++;   
+    // Merge elements from left and right vectors in sorted order
+    while (leftIndex < leftSize && rightIndex < rightSize) {
+        if (left[leftIndex] <= right[rightIndex]) {
+            merged.push_back(left[leftIndex]);
+            leftIndex++;
+        } else {
+            merged.push_back(right[rightIndex]);
+            rightIndex++;
         }
     }
 
-
-    while (jd < tamDir)
-    {
-        ordenado.push_back(dir[jd]);
-        jd++;
+    // If there are remaining elements in right vector, add them to the result
+    while (rightIndex < rightSize) {
+        merged.push_back(right[rightIndex]);
+        rightIndex++;
     }
 
-
-    while (ie < tamEsq)
-    {
-        ordenado.push_back(esq[ie]);
-        ie++;   
+    // If there are remaining elements in left vector, add them to the result
+    while (leftIndex < leftSize) {
+        merged.push_back(left[leftIndex]);
+        leftIndex++;
     }
 
-
-
-    return ordenado;
-
+    return merged;
 }
 
-std::vector <int> MergeSort(std::vector <int> vet){
+std::vector<int> MergeSort(std::vector<int>& inputVector) {
 
-    int tam = vet.size();
+    int vectorSize = inputVector.size();
 
-    if(tam<=1){
-       // std::cout<<"Vetor ordenado";
-        return vet;
+    if (vectorSize <= 1) {
+        return inputVector;
     }
-    std::vector<int> esq(vet.begin(), vet.begin() + tam / 2);
-    std::vector<int> dir(vet.begin() + tam / 2, vet.end());
 
+    std::vector<int> leftHalf(inputVector.begin(), inputVector.begin() + vectorSize / 2);
+    std::vector<int> rightHalf(inputVector.begin() + vectorSize / 2, inputVector.end());
 
-   return Mescla(MergeSort(esq), MergeSort(dir));
-
+    return Merge(MergeSort(leftHalf), MergeSort(rightHalf));
 }
 
 
 int main() {
-
-  std::vector<int> vet;
-
-  std::ifstream arquivo("../Dataset/dataset_non_ascending.txt");
-  std::string palavra;
-
-///////////////////ABRINDO O ARQUIVO ////////////////////////////////////////////////
-
-  if(arquivo.is_open()){
-    while(arquivo >> palavra){
-
-        //std::cout<<palavra <<std::endl;
-        int numero =  std::stoi(palavra);
-        vet.push_back(numero);
+    // Ler dados do arquivo
+    std::ifstream datasetFile("../../Dataset/100k_parc_ordenado.txt");
+    if (!datasetFile) {
+        std::cerr << "Failed to open file" << std::endl;
+        return 1;
     }
-    arquivo.close();
-
-  }else{
-    std::cout<<"arquivo não foi aberto"<<std::endl;
-  }
-////////////////////////////////////////////////////////////////////////////////////////////
-
-    std:: vector <int> ordenado;
-
-    auto inicio = std::chrono::high_resolution_clock::now(); // calculando tempo de execução
-
-        ordenado = MergeSort(vet);
-
-
-    auto fim = std::chrono::high_resolution_clock::now();
-
-    auto duracao = std::chrono::duration_cast<std::chrono::seconds>(fim - inicio);
-
-    int tam = ordenado.size();
-
-    for (int i = 0; i < tam; i++) {
-        std::cout << ordenado[i] << " ";
+    int number;
+    std::vector<int> vector;
+    while (datasetFile >> number) {
+        vector.push_back(number);
     }
+    datasetFile.close();
 
+	std::vector <int> ordered;
 
+	auto startTime = std::chrono::high_resolution_clock::now();
 
+	ordered = MergeSort(vector);
 
-    std::cout << "Tempo de execução: " << duracao.count() << "segundos" << std::endl;  // resultado do tempo de execução
+	auto endTime = std::chrono::high_resolution_clock::now();
 
- return 0;
+	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
 
+	// int tam = ordered.size();
+	// for (int i = 0; i < tam; i++) {
+	// 	std::cout << ordered[i] << " ";
+	// }
+
+    std::cout << "Execution time: " << executionTime.count() << " microseconds" << std::endl;
+
+	return 0;
 }
