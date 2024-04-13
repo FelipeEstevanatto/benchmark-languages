@@ -1,30 +1,30 @@
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 153.000000 ms
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 153.000000 ms
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 154.000000 ms
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 159.000000 ms
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 158.000000 ms
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 154.000000 ms
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 178.000000 ms
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 169.000000 ms
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 163.000000 ms
-MergeSort - File: /1000k_parc_ordenado.txt
-Execution time: 158.000000 ms
-MergeSort - File: /100k_parc_ordenado.txt
-Execution time: 19.000000 ms
-MergeSort - File: /100k_parc_ordenado.txt
-Execution time: 20.000000 ms
-MergeSort - File: /100k_parc_ordenado.txt
-Execution time: 16.000000 ms
-MergeSort - File: /100k_parc_ordenado.txt
-Execution time: 16.000000 ms
-MergeSort - File: /100k_parc_ordenado.txt
-Execution time: 17.000000 ms
+C - MergeSort - File: /1k_parc_ordenado.txt
+Execution time: 0.032000 ms
+C - MergeSort - File: /10k_parc_ordenado.txt
+Execution time: 0.306000 ms
+C - MergeSort - File: /100k_parc_ordenado.txt
+Execution time: 3.191000 ms
+C - MergeSort - File: /500k_parc_ordenado.txt
+Execution time: 18.426000 ms
+C - MergeSort - File: /1000k_parc_ordenado.txt
+Execution time: 42.830000 ms
+C - MergeSort - File: /1k_parc_ordenado.txt
+Execution time: 0.032000 ms
+C - MergeSort - File: /10k_parc_ordenado.txt
+Execution time: 0.300000 ms
+C - MergeSort - File: /100k_parc_ordenado.txt
+Execution time: 3.419000 ms
+C - MergeSort - File: /500k_parc_ordenado.txt
+Execution time: 17.657000 ms
+C - MergeSort - File: /1000k_parc_ordenado.txt
+Execution time: 39.660000 ms
+C - MergeSort - File: /1k_parc_ordenado.txt
+Execution time: 0.034000 ms
+C - MergeSort - File: /10k_parc_ordenado.txt
+Execution time: 0.310000 ms
+C - MergeSort - File: /100k_parc_ordenado.txt
+Execution time: 3.321000 ms
+C - MergeSort - File: /500k_parc_ordenado.txt
+Execution time: 17.608000 ms
+C - MergeSort - File: /1000k_parc_ordenado.txt
+Execution time: 35.905000 ms
