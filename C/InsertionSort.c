@@ -20,6 +20,20 @@ void insertionSort(int* array, int arraySize) {
     }
 }
 
+void writeResult(clock_t executionTime, char* fileName) {
+    FILE *resultsFile;
+    resultsFile = fopen("../../Results/InsertionSort.txt", "a");
+    if (resultsFile == NULL) {
+        perror("Erro ao abrir o resultsFile");
+        return;
+    }
+
+    char *name = strrchr(fileName, '/');
+    fprintf(resultsFile, "C - InsertionSort - File: %s\n", name);
+    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    fclose(resultsFile);
+}
+
 int main(int argc, char *argv[]) {
     // Default values
     char filePath[256] = "../../Dataset/100k_parc_ordenado.txt";
@@ -57,5 +71,8 @@ int main(int argc, char *argv[]) {
     printf("Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
     
     free(numbers);
+
+	writeResult(executionTime, filePath);
+
     return 0;
 }

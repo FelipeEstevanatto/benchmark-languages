@@ -52,11 +52,24 @@ std::vector<int> MergeSort(std::vector<int>& inputVector) {
     return Merge(MergeSort(leftHalf), MergeSort(rightHalf));
 }
 
+void writeResult(clock_t executionTime, char* fileName) {
+    FILE *resultsFile;
+    resultsFile = fopen("../../Results/MergeSort.txt", "a");
+    if (resultsFile == NULL) {
+        perror("Erro ao abrir o resultsFile");
+        return;
+    }
+
+    char *name = strrchr(fileName, '/');
+    fprintf(resultsFile, "C++ - MergeSort - File: %s\n", name);
+    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    fclose(resultsFile);
+}
 
 int main(int argc, char *argv[]) {
     // Default values
-    std::string filePath = "../../Dataset/100k_parc_ordenado.txt";
-    size_t maxSize = 100000;
+    std::string filePath = "../../Dataset/1000k_parc_ordenado.txt";
+    size_t maxSize = 1000000;
 
     // Check if the user provided the input file
     if (argc >= 2) {
@@ -96,10 +109,12 @@ int main(int argc, char *argv[]) {
 
 	// int tam = ordered.size();
 	// for (int i = 0; i < tam; i++) {
-	// 	std::cout << ordered[i] << " ";
+	// 	std::cout << ordered[i] << std::endl;
 	// }
 
     std::cout << "Execution time: " << executionTime.count() << " microseconds" << std::endl;
+
+	writeResult(executionTime, filePath);
 
 	return 0;
 }

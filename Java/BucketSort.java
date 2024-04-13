@@ -1,12 +1,12 @@
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.io.File;
-import java.util.stream.Collectors;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
 
 // Average complexity: O(n+k)
 // Worst case complexity: O(n^2)
@@ -33,8 +33,8 @@ public class BucketSort {
 
     public static void main(String args[]) {
         // Default values
-        String filePath = "../Dataset/100k_parc_ordenado.txt";
-        int maxSize = 100000;
+        String filePath = "../Dataset/1000k_parc_ordenado.txt";
+        int maxSize = 1000000;
 
         // Check if the user provided the input file
         if (args.length >= 1) {
@@ -57,6 +57,8 @@ public class BucketSort {
         long elapsedTime = endTime - startTime;
 
         System.out.println("Elapsed time: " + elapsedTime + " miliseconds");
+
+        writeResult(elapsedTime, filePath);
     }
 
     public static void bucketSort(int[] numbers) {
@@ -97,5 +99,21 @@ public class BucketSort {
             }
             numbers[previousIndex + 1] = currentNumber;
         }
+    }
+
+    public static void writeResult(long executionTime, String fileName) {
+        File resultsFile = new File("../Results/BucketSort.txt");
+        PrintWriter writer;
+        try {
+            writer = new PrintWriter(new FileOutputStream(resultsFile, true)); // true for append mode
+        } catch (FileNotFoundException e) {
+            System.err.println("Error opening the results file");
+            return;
+        }
+
+        String name = new File(fileName).getName();
+        writer.printf("Java - BucketSort - File: %s\n", name);
+        writer.printf("Execution time: %.2f ms\n", (double)executionTime / 1_000_000); // convert nanoseconds to milliseconds
+        writer.close();
     }
 }

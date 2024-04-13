@@ -4,7 +4,7 @@
 #include <vector>
 #include <chrono>
 
-void InsertionSort(std::vector<int>& numbers, int arraySize){
+std::vector<int> InsertionSort(std::vector<int>& numbers, int arraySize){
     int currentIndex, previousIndex;
 
     for(currentIndex = 1; currentIndex < arraySize; currentIndex++){
@@ -17,16 +17,27 @@ void InsertionSort(std::vector<int>& numbers, int arraySize){
         }
     }
 
-    // for (currentIndex = 0; currentIndex < arraySize; currentIndex++) {
-    //     std::cout << numbers[currentIndex] << " ";
-    // }
-    // std::cout << std::endl;
+    return numbers;
+}
+
+void writeResult(clock_t executionTime, char* fileName) {
+    FILE *resultsFile;
+    resultsFile = fopen("../../Results/InsertionSort.txt", "a");
+    if (resultsFile == NULL) {
+        perror("Erro ao abrir o resultsFile");
+        return;
+    }
+
+    char *name = strrchr(fileName, '/');
+    fprintf(resultsFile, "C++ - InsertionSort - File: %s\n", name);
+    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    fclose(resultsFile);
 }
 
 int main(int argc, char *argv[]) {
     // Default values
-    std::string filePath = "../../Dataset/100k_parc_ordenado.txt";
-    size_t maxSize = 100000;
+    std::string filePath = "../../Dataset/1000k_parc_ordenado.txt";
+    size_t maxSize = 1000000;
 
     // Check if the user provided the input file
     if (argc >= 2) {
@@ -55,11 +66,17 @@ int main(int argc, char *argv[]) {
     datasetFile.close();
 
     auto startTime = std::chrono::high_resolution_clock::now();
-    InsertionSort(numbers, 100000);
+    numbers = InsertionSort(numbers, maxSize);
     auto endTime = std::chrono::high_resolution_clock::now();
 
     auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
     std::cout << "Execution time: " << executionTime.count() << " microseconds" << std::endl;
+
+    // for (int i = 0; i < numbers.size(); i++) {
+    //     std::cout << numbers[i] << " ";
+    // }
+
+	writeResult(executionTime, filePath);
 
     return 0;
 }

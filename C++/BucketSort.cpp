@@ -58,10 +58,24 @@ std::vector<int> BucketSort(const std::vector<int>& inputVector) {
     return sortedVector;
 }
 
+void writeResult(clock_t executionTime, char* fileName) {
+    FILE *resultsFile;
+    resultsFile = fopen("../../Results/BucketSort.txt", "a");
+    if (resultsFile == NULL) {
+        perror("Erro ao abrir o resultsFile");
+        return;
+    }
+
+    char *name = strrchr(fileName, '/');
+    fprintf(resultsFile, "C++ - BucketSort - File: %s\n", name);
+    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    fclose(resultsFile);
+}
+
 int main(int argc, char *argv[]) {
     // Default values
-    std::string filePath = "../../Dataset/100k_parc_ordenado.txt";
-    size_t maxSize = 100000;
+    std::string filePath = "../../Dataset/1000k_parc_ordenado.txt";
+    size_t maxSize = 1000000;
 
     // Check if the user provided the input file
     if (argc >= 2) {
@@ -78,7 +92,7 @@ int main(int argc, char *argv[]) {
         std::cerr << "Failed to open dataset file" << std::endl;
         return 1;
     }
-    
+
     int number;
     std::vector<int> numbers;
     while (datasetFile >> number) {
@@ -105,6 +119,8 @@ int main(int argc, char *argv[]) {
 
     auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
     std::cout << "Execution time: " << executionTime.count() << " microseconds" << std::endl;
+
+    writeResult(executionTime, filePath);
 
     return 0;
 }

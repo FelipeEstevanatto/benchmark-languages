@@ -67,7 +67,7 @@ void writeResult(clock_t executionTime, char* fileName) {
     }
 
     char *name = strrchr(fileName, '/');
-    fprintf(resultsFile, "MergeSort - File: %s\n", name);
+    fprintf(resultsFile, "C - MergeSort - File: %s\n", name);
     fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
     fclose(resultsFile);
 }
