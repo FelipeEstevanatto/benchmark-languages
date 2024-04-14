@@ -30,4 +30,4 @@ Para os algoritmos em C e Java, iremos testar compilando o código com as flags 
 
 # Produzir relatório com os resultados obtidos
 - Criar a pasta "Results" na raiz do projeto
-- Rodar o script "run.sh" para compilar e rodar os testes
+- Rodar o script "powershell  -executionpolicy bypass -File .\run.ps1" para compilar e rodar os testes

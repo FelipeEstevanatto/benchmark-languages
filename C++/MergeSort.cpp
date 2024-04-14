@@ -61,8 +61,8 @@ void writeResult(clock_t executionTime, char* fileName, char* resultPath) {
     }
 
     char *name = strrchr(fileName, '/');
-    fprintf(resultsFile, "C - MergeSort - File: %s\n", name);
-    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    //fprintf(resultsFile, "C - MergeSort - File: %s\n", name);
+    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime));
     fclose(resultsFile);
 }
 
@@ -111,14 +111,14 @@ int main(int argc, char *argv[]) {
 
 	auto endTime = std::chrono::high_resolution_clock::now();
 
-	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+	auto executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
 
 	// int tam = ordered.size();
 	// for (int i = 0; i < tam; i++) {
 	// 	std::cout << ordered[i] << std::endl;
 	// }
 
-    std::cout << "Execution time: " << executionTime.count() << " microseconds" << std::endl;
+    std::cout << "Execution time: " << executionTime.count() << " milliseconds" << std::endl;
 
     writeResult(executionTime, filePath, resultPath);
 

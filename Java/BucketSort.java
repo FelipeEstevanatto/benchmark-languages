@@ -117,8 +117,8 @@ public class BucketSort {
         }
 
         String name = new File(fileName).getName();
-        writer.printf("Java - BucketSort - File: %s\n", name);
-        writer.printf("Execution time: %.2f ms\n", (double)executionTime / 1_000_000); // convert nanoseconds to milliseconds
+        //writer.printf("Java - BucketSort - File: %s\n", name);
+        writer.printf("Execution time: %.6f ms\n", (double)executionTime); // convert nanoseconds to milliseconds
         writer.close();
     }
 }

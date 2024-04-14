@@ -29,8 +29,8 @@ void writeResult(clock_t executionTime, char* fileName, char* resultPath) {
     }
 
     char *name = strrchr(fileName, '/');
-    fprintf(resultsFile, "C - InsertionSort - File: %s\n", name);
-    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
+    //fprintf(resultsFile, "C - InsertionSort - File: %s\n", name);
+    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime));
     fclose(resultsFile);
 }
 
@@ -75,8 +75,8 @@ int main(int argc, char *argv[]) {
     numbers = InsertionSort(numbers, maxSize);
     auto endTime = std::chrono::high_resolution_clock::now();
 
-    auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
-    std::cout << "Execution time: " << executionTime.count() << " microseconds" << std::endl;
+    auto executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+    std::cout << "Execution time: " << executionTime.count() << " milliseconds" << std::endl;
 
     // for (int i = 0; i < numbers.size(); i++) {
     //     std::cout << numbers[i] << " ";

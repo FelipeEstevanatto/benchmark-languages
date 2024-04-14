@@ -40,16 +40,16 @@ void writeResult(clock_t executionTime, char* fileName, char* resultPath) {
     }
 
     char *name = strrchr(fileName, '/');
-    fprintf(resultsFile, "C - BucketSort - File: %s\n", name);
+    //fprintf(resultsFile, "C - BucketSort - File: %s\n", name);
     fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
     fclose(resultsFile);
 }
 
 int main(int argc, char *argv[]) {
     // Default values
-    char filePath[256] = "../../Dataset/100k_parc_ordenado.txt";
+    char filePath[256] = "../../Dataset/1000k_parc_ordenado.txt";
     char resultPath[256] = "../../Results/BucketSort.txt";
-    size_t maxSize = 100000;
+    size_t maxSize = 1000000;
 
     // Check if the user provided the input file
     if (argc >= 2) {
