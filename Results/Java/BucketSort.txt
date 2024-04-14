@@ -1,0 +1,60 @@
+Running BucketSort test with 1k_parc_ordenado dataset
+Execution time: 2,000000 ms
+Execution time: 3,000000 ms
+Execution time: 2,000000 ms
+Running BucketSort test with 10k_parc_ordenado dataset
+Execution time: 7,000000 ms
+Execution time: 6,000000 ms
+Execution time: 7,000000 ms
+Running BucketSort test with 100k_parc_ordenado dataset
+Execution time: 12,000000 ms
+Execution time: 13,000000 ms
+Execution time: 13,000000 ms
+Running BucketSort test with 500k_parc_ordenado dataset
+Execution time: 34,000000 ms
+Execution time: 33,000000 ms
+Execution time: 33,000000 ms
+Running BucketSort test with 1000k_parc_ordenado dataset
+Execution time: 48,000000 ms
+Execution time: 51,000000 ms
+Execution time: 59,000000 ms
+Running BucketSort test with 1k_decreasing size
+Execution time: 2,000000 ms
+Execution time: 2,000000 ms
+Execution time: 2,000000 ms
+Running BucketSort test with 1k_random size
+Execution time: 14,000000 ms
+Execution time: 14,000000 ms
+Execution time: 15,000000 ms
+Running BucketSort test with 10k_decreasing size
+Execution time: 7,000000 ms
+Execution time: 6,000000 ms
+Execution time: 6,000000 ms
+Running BucketSort test with 10k_random size
+Execution time: 17,000000 ms
+Execution time: 18,000000 ms
+Execution time: 18,000000 ms
+Running BucketSort test with 100k_decreasing size
+Execution time: 14,000000 ms
+Execution time: 14,000000 ms
+Execution time: 15,000000 ms
+Running BucketSort test with 100k_random size
+Execution time: 22,000000 ms
+Execution time: 22,000000 ms
+Execution time: 21,000000 ms
+Running BucketSort test with 500k_decreasing size
+Execution time: 37,000000 ms
+Execution time: 46,000000 ms
+Execution time: 37,000000 ms
+Running BucketSort test with 500k_random size
+Execution time: 62,000000 ms
+Execution time: 53,000000 ms
+Execution time: 61,000000 ms
+Running BucketSort test with 1000k_decreasing size
+Execution time: 59,000000 ms
+Execution time: 47,000000 ms
+Execution time: 48,000000 ms
+Running BucketSort test with 1000k_random size
+Execution time: 83,000000 ms
+Execution time: 77,000000 ms
+Execution time: 79,000000 ms

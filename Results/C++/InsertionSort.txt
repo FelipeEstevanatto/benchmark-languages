@@ -1,0 +1,15 @@
+Running InsertionSort test with 1k_parc_ordenado dataset
+Running InsertionSort test with 10k_parc_ordenado dataset
+Running InsertionSort test with 100k_parc_ordenado dataset
+Running InsertionSort test with 500k_parc_ordenado dataset
+Running InsertionSort test with 1000k_parc_ordenado dataset
+Running InsertionSort test with 1k_decreasing size
+Running InsertionSort test with 1k_random size
+Running InsertionSort test with 10k_decreasing size
+Running InsertionSort test with 10k_random size
+Running InsertionSort test with 100k_decreasing size
+Running InsertionSort test with 100k_random size
+Running InsertionSort test with 500k_decreasing size
+Running InsertionSort test with 500k_random size
+Running InsertionSort test with 1000k_decreasing size
+Running InsertionSort test with 1000k_random size

@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
     //     std::cout << numbers[i] << " ";
     // }
 
-    writeResult(executionTime, filePath, resultPath);
+    writeResult(executionTime.count(), filePath, resultPath);
 
     return 0;
 }

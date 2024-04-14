@@ -125,7 +125,7 @@ int main(int argc, char *argv[]) {
     // }
     // std::cout << std::endl;
 
-    writeResult(executionTime, filePath, resultPath);
+    writeResult(executionTime.count(), filePath, resultPath);
 
     return 0;
 }

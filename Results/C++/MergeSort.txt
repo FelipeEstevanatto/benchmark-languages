@@ -1,0 +1,60 @@
+Running MergeSort test with 1k_parc_ordenado dataset
+Execution time: 0.000000 ms
+Execution time: 0.998000 ms
+Execution time: 0.000000 ms
+Running MergeSort test with 10k_parc_ordenado dataset
+Execution time: 4.511000 ms
+Execution time: 5.007000 ms
+Execution time: 4.000000 ms
+Running MergeSort test with 100k_parc_ordenado dataset
+Execution time: 35.510000 ms
+Execution time: 36.016000 ms
+Execution time: 35.003000 ms
+Running MergeSort test with 500k_parc_ordenado dataset
+Execution time: 164.061000 ms
+Execution time: 166.050000 ms
+Execution time: 163.585000 ms
+Running MergeSort test with 1000k_parc_ordenado dataset
+Execution time: 327.738000 ms
+Execution time: 327.848000 ms
+Execution time: 329.654000 ms
+Running MergeSort test with 1k_decreasing size
+Execution time: 0.000000 ms
+Execution time: 0.999000 ms
+Execution time: 0.000000 ms
+Running MergeSort test with 1k_random size
+Execution time: 1.001000 ms
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Running MergeSort test with 10k_decreasing size
+Execution time: 3.998000 ms
+Execution time: 4.000000 ms
+Execution time: 4.000000 ms
+Running MergeSort test with 10k_random size
+Execution time: 4.003000 ms
+Execution time: 4.001000 ms
+Execution time: 4.509000 ms
+Running MergeSort test with 100k_decreasing size
+Execution time: 35.001000 ms
+Execution time: 33.999000 ms
+Execution time: 34.511000 ms
+Running MergeSort test with 100k_random size
+Execution time: 38.000000 ms
+Execution time: 39.000000 ms
+Execution time: 39.003000 ms
+Running MergeSort test with 500k_decreasing size
+Execution time: 163.046000 ms
+Execution time: 161.542000 ms
+Execution time: 163.558000 ms
+Running MergeSort test with 500k_random size
+Execution time: 183.585000 ms
+Execution time: 183.765000 ms
+Execution time: 182.916000 ms
+Running MergeSort test with 1000k_decreasing size
+Execution time: 326.159000 ms
+Execution time: 330.565000 ms
+Execution time: 325.653000 ms
+Running MergeSort test with 1000k_random size
+Execution time: 374.186000 ms
+Execution time: 372.375000 ms
+Execution time: 375.456000 ms
