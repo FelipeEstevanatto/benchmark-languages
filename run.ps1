@@ -65,7 +65,7 @@ foreach ($sort in $sorts) {
         # write in the file what test and size it is running now
         Add-Content -Path "..\Results\C\$sort.txt" -Value "Running $sort test with ${size}_parc_ordenado dataset"
         for ($i = 1; $i -le 3; $i++) {
-            .\$sort.exe "..\Dataset\${size}_parc_ordenado.txt" "..\Results\C\$sort.txt" $size_num
+            & ".\$($sort).exe" "..\Dataset\${size}_parc_ordenado.txt" "..\Results\C\$sort.txt" $size_num
         }
     }
 }
@@ -77,12 +77,12 @@ foreach ($sort in $sorts) {
         # write in the file what test and size it is running now
         Add-Content -Path "..\Results\C\$sort.txt" -Value "Running $sort test with ${size}_decreasing size"
         for ($i = 1; $i -le 3; $i++) {
-            .\$sort.exe "..\Dataset\1000k_decreasing.txt" "..\Results\C\$sort.txt" $size_num
+            & ".\$($sort).exe" "..\Dataset\1000k_decreasing.txt" "..\Results\C\$sort.txt" $size_num
         }
         # write in the file what test and size it is running now
         Add-Content -Path "..\Results\C\$sort.txt" -Value "Running $sort test with ${size}_random size"
         for ($i = 1; $i -le 3; $i++) {
-            .\$sort.exe "..\Dataset\1000k_random.txt" "..\Results\C\$sort.txt" $size_num
+            & ".\$($sort).exe" "..\Dataset\1000k_random.txt" "..\Results\C\$sort.txt" $size_num
         }
     }
 }
@@ -105,7 +105,7 @@ foreach ($sort in $sorts) {
         # write in the file what test and size it is running now
         Add-Content -Path "..\Results\C++\$sort.txt" -Value "Running $sort test with ${size}_parc_ordenado dataset"
         for ($i = 1; $i -le 3; $i++) {
-            .\$sort.exe "..\Dataset\${size}_parc_ordenado.txt" "..\Results\C++\$sort.txt" $size_num
+            & ".\$($sort).exe" "..\Dataset\${size}_parc_ordenado.txt" "..\Results\C++\$sort.txt" $size_num
         }
     }
 }
@@ -117,12 +117,12 @@ foreach ($sort in $sorts) {
         # write in the file what test and size it is running now
         Add-Content -Path "..\Results\C++\$sort.txt" -Value "Running $sort test with ${size}_decreasing size"
         for ($i = 1; $i -le 3; $i++) {
-            .\$sort.exe "..\Dataset\1000k_decreasing.txt" "..\Results\C++\$sort.txt" $size_num
+            & ".\$($sort).exe" "..\Dataset\1000k_decreasing.txt" "..\Results\C++\$sort.txt" $size_num
         }
         # write in the file what test and size it is running now
         Add-Content -Path "..\Results\C++\$sort.txt" -Value "Running $sort test with ${size}_random size"
         for ($i = 1; $i -le 3; $i++) {
-            .\$sort.exe "..\Dataset\1000k_random.txt" "..\Results\C++\$sort.txt" $size_num
+            & ".\$($sort).exe" "..\Dataset\1000k_random.txt" "..\Results\C++\$sort.txt" $size_num
         }
     }
 }

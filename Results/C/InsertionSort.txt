@@ -1,0 +1,45 @@
+Running InsertionSort test with 1k_parc_ordenado dataset
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Running InsertionSort test with 10k_parc_ordenado dataset
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Running InsertionSort test with 100k_parc_ordenado dataset
+Execution time: 2.000000 ms
+Execution time: 2.000000 ms
+Execution time: 2.000000 ms
+Running InsertionSort test with 500k_parc_ordenado dataset
+Execution time: 49.000000 ms
+Execution time: 37.000000 ms
+Execution time: 38.000000 ms
+Running InsertionSort test with 1000k_parc_ordenado dataset
+Execution time: 164.000000 ms
+Execution time: 148.000000 ms
+Execution time: 167.000000 ms
+Running InsertionSort test with 1k_decreasing size
+Execution time: 1.000000 ms
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Running InsertionSort test with 1k_random size
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Running InsertionSort test with 10k_decreasing size
+Execution time: 12.000000 ms
+Execution time: 11.000000 ms
+Execution time: 12.000000 ms
+Running InsertionSort test with 10k_random size
+Execution time: 5.000000 ms
+Execution time: 5.000000 ms
+Execution time: 7.000000 ms
+Running InsertionSort test with 100k_decreasing size
+Execution time: 1237.000000 ms
+Execution time: 1243.000000 ms
+Execution time: 1226.000000 ms
+Running InsertionSort test with 100k_random size
+Execution time: 651.000000 ms
+Execution time: 647.000000 ms
+Execution time: 656.000000 ms
+Running InsertionSort test with 500k_decreasing size

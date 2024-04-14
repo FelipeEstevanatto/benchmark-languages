@@ -20,17 +20,17 @@ std::vector<int> InsertionSort(std::vector<int>& numbers, int arraySize){
     return numbers;
 }
 
-void writeResult(clock_t executionTime, char* fileName, char* resultPath) {
+void writeResult(double executionTime, std::string fileName, std::string resultPath) {
     FILE *resultsFile;
-    resultsFile = fopen(resultPath, "a");
+    resultsFile = fopen(resultPath.c_str(), "a");
     if (resultsFile == NULL) {
         perror("Erro ao abrir o resultsFile");
         return;
     }
 
-    char *name = strrchr(fileName, '/');
+    std::string name = fileName.substr(fileName.find_last_of('/') + 1);
     //fprintf(resultsFile, "C - InsertionSort - File: %s\n", name);
-    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime));
+    fprintf(resultsFile, "Execution time: %.6f ms\n", executionTime);
     fclose(resultsFile);
 }
 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
         maxSize = std::stoi(argv[3]);
     }
 
-    std::ifstream datasetFile(filePath);
+    std::ifstream datasetFile(filePath.c_str());
 
     if (!datasetFile) {
         std::cerr << "Failed to open dataset file" << std::endl;
@@ -75,8 +75,8 @@ int main(int argc, char *argv[]) {
     numbers = InsertionSort(numbers, maxSize);
     auto endTime = std::chrono::high_resolution_clock::now();
 
-    auto executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-    std::cout << "Execution time: " << executionTime.count() << " milliseconds" << std::endl;
+    auto executionTime = std::chrono::duration<double, std::milli>(endTime - startTime);
+    std::cout << "Execution time: " << std::fixed << executionTime.count() << " milliseconds" << std::endl;
 
     // for (int i = 0; i < numbers.size(); i++) {
     //     std::cout << numbers[i] << " ";

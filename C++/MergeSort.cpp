@@ -52,17 +52,17 @@ std::vector<int> MergeSort(std::vector<int>& inputVector) {
     return Merge(MergeSort(leftHalf), MergeSort(rightHalf));
 }
 
-void writeResult(clock_t executionTime, char* fileName, char* resultPath) {
+void writeResult(double executionTime, std::string fileName, std::string resultPath) {
     FILE *resultsFile;
-    resultsFile = fopen(resultPath, "a");
+    resultsFile = fopen(resultPath.c_str(), "a");
     if (resultsFile == NULL) {
         perror("Erro ao abrir o resultsFile");
         return;
     }
 
-    char *name = strrchr(fileName, '/');
+    std::string name = fileName.substr(fileName.find_last_of('/') + 1);
     //fprintf(resultsFile, "C - MergeSort - File: %s\n", name);
-    fprintf(resultsFile, "Execution time: %lf ms\n", ((double)executionTime));
+    fprintf(resultsFile, "Execution time: %.6f ms\n", executionTime);
     fclose(resultsFile);
 }
 
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
         maxSize = std::stoi(argv[3]);
     }
 
-    std::ifstream datasetFile(filePath);
+    std::ifstream datasetFile(filePath.c_str());
 
     if (!datasetFile) {
         std::cerr << "Failed to open dataset file" << std::endl;
@@ -111,16 +111,15 @@ int main(int argc, char *argv[]) {
 
 	auto endTime = std::chrono::high_resolution_clock::now();
 
-	auto executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-
+    auto executionTime = std::chrono::duration<double, std::milli>(endTime - startTime);
+    std::cout << "Execution time: " << std::fixed << executionTime.count() << " milliseconds" << std::endl;
+    
 	// int tam = ordered.size();
 	// for (int i = 0; i < tam; i++) {
 	// 	std::cout << ordered[i] << std::endl;
 	// }
 
-    std::cout << "Execution time: " << executionTime.count() << " milliseconds" << std::endl;
-
-    writeResult(executionTime, filePath, resultPath);
+    writeResult(executionTime.count(), filePath.c_str(), resultPath.c_str());
 
 	return 0;
 }
