@@ -6,55 +6,47 @@
 // Average complexity: O(nlog(n))
 // Worst complexity: O(nlog(n))
 
-void merge(int* array, int left, int middle, int right) {
-    int leftSize = middle - left + 1;
-    int rightSize = right - middle;
-
-    int* leftArray = malloc(leftSize * sizeof(int));
-    int* rightArray = malloc(rightSize * sizeof(int));
-
-    memcpy(leftArray, &array[left], leftSize * sizeof(int));
-    memcpy(rightArray, &array[middle + 1], rightSize * sizeof(int));
-
-    int leftIndex = 0;
-    int rightIndex = 0;
+void merge(int* array, int* temp, int left, int middle, int right) {
+    int leftIndex = left;
+    int rightIndex = middle + 1;
     int mergedIndex = left;
 
-    while (leftIndex < leftSize && rightIndex < rightSize) {
-        if (leftArray[leftIndex] <= rightArray[rightIndex]) {
-            array[mergedIndex] = leftArray[leftIndex];
+    while (leftIndex <= middle && rightIndex <= right) {
+        if (array[leftIndex] <= array[rightIndex]) {
+            temp[mergedIndex] = array[leftIndex];
             leftIndex++;
         } else {
-            array[mergedIndex] = rightArray[rightIndex];
+            temp[mergedIndex] = array[rightIndex];
             rightIndex++;
         }
         mergedIndex++;
     }
 
-    while (leftIndex < leftSize) {
-        array[mergedIndex] = leftArray[leftIndex];
+    while (leftIndex <= middle) {
+        temp[mergedIndex] = array[leftIndex];
         leftIndex++;
         mergedIndex++;
     }
 
-    while (rightIndex < rightSize) {
-        array[mergedIndex] = rightArray[rightIndex];
+    while (rightIndex <= right) {
+        temp[mergedIndex] = array[rightIndex];
         rightIndex++;
         mergedIndex++;
     }
 
-    free(leftArray);
-    free(rightArray);
+    for (int i = left; i <= right; i++) {
+        array[i] = temp[i];
+    }
 }
 
-void mergeSort(int* array, int left, int right) {
+void mergeSort(int* array, int* temp, int left, int right) {
     if (left < right) {
         int middle = left + (right - left) / 2;
 
-        mergeSort(array, left, middle);
-        mergeSort(array, middle + 1, right);
+        mergeSort(array, temp, left, middle);
+        mergeSort(array, temp, middle + 1, right);
 
-        merge(array, left, middle, right);
+        merge(array, temp, left, middle, right);
     }
 }
 
@@ -111,12 +103,15 @@ int main(int argc, char *argv[]) {
     fclose(datasetFile);
 
     executionTime = clock();
-    mergeSort(numbers, 0, maxSize - 1);
+    int *temp = malloc(maxSize * sizeof(int)); // Allocate temporary array
+    mergeSort(numbers, temp, 0, maxSize - 1);
     executionTime = clock() - executionTime;
+    
     printf("Execution time: %lf ms\n", ((double)executionTime) / ((CLOCKS_PER_SEC / 1000)));
 
     writeResult(executionTime, filePath, resultPath);
 
     free(numbers);
+    free(temp);
     return 0;
 }
