@@ -3,58 +3,58 @@ Execution time: 0.000000 ms
 Execution time: 0.000000 ms
 Execution time: 0.000000 ms
 Running BucketSort test with 10k_parc_ordenado dataset
-Execution time: 1.005000 ms
-Execution time: 0.000000 ms
 Execution time: 1.001000 ms
+Execution time: 0.999000 ms
+Execution time: 1.000000 ms
 Running BucketSort test with 100k_parc_ordenado dataset
-Execution time: 3.999000 ms
-Execution time: 4.004000 ms
-Execution time: 3.000000 ms
+Execution time: 3.997000 ms
+Execution time: 4.000000 ms
+Execution time: 3.510000 ms
 Running BucketSort test with 500k_parc_ordenado dataset
-Execution time: 19.004000 ms
-Execution time: 17.999000 ms
-Execution time: 17.673000 ms
+Execution time: 18.003000 ms
+Execution time: 17.525000 ms
+Execution time: 18.005000 ms
 Running BucketSort test with 1000k_parc_ordenado dataset
-Execution time: 37.524000 ms
-Execution time: 36.471000 ms
-Execution time: 36.000000 ms
+Execution time: 37.508000 ms
+Execution time: 37.000000 ms
+Execution time: 37.007000 ms
 Running BucketSort test with 1k_decreasing size
 Execution time: 0.000000 ms
 Execution time: 0.000000 ms
-Execution time: 0.000000 ms
+Execution time: 0.998000 ms
 Running BucketSort test with 1k_random size
 Execution time: 0.000000 ms
-Execution time: 1.009000 ms
+Execution time: 0.999000 ms
 Execution time: 0.000000 ms
 Running BucketSort test with 10k_decreasing size
+Execution time: 0.998000 ms
 Execution time: 0.000000 ms
-Execution time: 1.001000 ms
-Execution time: 1.002000 ms
+Execution time: 0.000000 ms
 Running BucketSort test with 10k_random size
-Execution time: 0.995000 ms
-Execution time: 0.999000 ms
-Execution time: 0.999000 ms
+Execution time: 1.001000 ms
+Execution time: 1.000000 ms
+Execution time: 2.004000 ms
 Running BucketSort test with 100k_decreasing size
-Execution time: 3.507000 ms
-Execution time: 4.001000 ms
+Execution time: 4.000000 ms
+Execution time: 4.000000 ms
 Execution time: 4.000000 ms
 Running BucketSort test with 100k_random size
-Execution time: 9.516000 ms
+Execution time: 8.000000 ms
 Execution time: 7.999000 ms
-Execution time: 8.018000 ms
+Execution time: 7.515000 ms
 Running BucketSort test with 500k_decreasing size
-Execution time: 17.513000 ms
-Execution time: 17.005000 ms
-Execution time: 18.512000 ms
+Execution time: 18.000000 ms
+Execution time: 18.000000 ms
+Execution time: 19.036000 ms
 Running BucketSort test with 500k_random size
-Execution time: 34.005000 ms
-Execution time: 33.183000 ms
-Execution time: 33.752000 ms
+Execution time: 35.022000 ms
+Execution time: 34.131000 ms
+Execution time: 34.511000 ms
 Running BucketSort test with 1000k_decreasing size
-Execution time: 34.935000 ms
-Execution time: 35.167000 ms
-Execution time: 35.017000 ms
+Execution time: 35.519000 ms
+Execution time: 36.169000 ms
+Execution time: 35.517000 ms
 Running BucketSort test with 1000k_random size
-Execution time: 56.042000 ms
-Execution time: 56.076000 ms
-Execution time: 55.519000 ms
+Execution time: 56.701000 ms
+Execution time: 56.517000 ms
+Execution time: 57.005000 ms

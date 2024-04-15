@@ -6,29 +6,44 @@
 // Average complexity: O(n+k)
 // Worst case complexity: O(n^2)
 
-void bucketSort(int* array, int arraySize) {
-    int i, j;
-    int* buckets = malloc(arraySize * sizeof(int));
-    if (buckets == NULL) {
-        perror("Erro ao alocar memoria");
-        return;
-    }
+void bucketSort(int* inputArray, int arraySize) {
+    int index, innerIndex;
+    int minValue = inputArray[0], maxValue = inputArray[0];
 
-    for (i = 0; i < arraySize; i++) {
-        buckets[i] = 0;
-    }
-
-    for (i = 0; i < arraySize; i++) {
-        (buckets[array[i]])++;
-    }
-
-    for (i = 0, j = 0; i < arraySize; i++) {
-        for (; buckets[i] > 0; (buckets[i])--) {
-            array[j++] = i;
+    // Find the minimum and maximum values in the array
+    for (index = 1; index < arraySize; index++) {
+        if (inputArray[index] < minValue) {
+            minValue = inputArray[index];
+        } else if (inputArray[index] > maxValue) {
+            maxValue = inputArray[index];
         }
     }
 
-    free(buckets);
+    // Create buckets for each possible value in the range minValue to maxValue
+    int range = maxValue - minValue + 1;
+    int* bucketArray = malloc(range * sizeof(int));
+    if (bucketArray == NULL) {
+        perror("Error allocating memory");
+        return;
+    }
+
+    for (index = 0; index < range; index++) {
+        bucketArray[index] = 0;
+    }
+
+    // Count the occurrences of each number
+    for (index = 0; index < arraySize; index++) {
+        (bucketArray[inputArray[index] - minValue])++;
+    }
+
+    // Reconstruct the array with the sorted numbers
+    for (index = 0, innerIndex = 0; index < range; index++) {
+        for (; bucketArray[index] > 0; (bucketArray[index])--) {
+            inputArray[innerIndex++] = index + minValue;
+        }
+    }
+
+    free(bucketArray);
 }
 
 void writeResult(clock_t executionTime, char* fileName, char* resultPath) {
@@ -47,7 +62,7 @@ void writeResult(clock_t executionTime, char* fileName, char* resultPath) {
 
 int main(int argc, char *argv[]) {
     // Default values
-    char filePath[256] = "../../Dataset/1000k_parc_ordenado.txt";
+    char filePath[256] = "../../Dataset/1000k_decreasing.txt";
     char resultPath[256] = "../../Results/BucketSort.txt";
     size_t maxSize = 1000000;
 
