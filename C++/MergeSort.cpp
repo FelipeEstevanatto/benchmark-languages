@@ -4,52 +4,45 @@
 #include <vector>
 #include <chrono>
 
-std::vector<int> Merge(std::vector<int> left, std::vector<int> right) {
-    int leftSize = left.size();
-    int rightSize = right.size();
+void Merge(std::vector<int>& inputVector, std::vector<int>& temp, int leftStart, int rightEnd) {
+    int leftEnd = (rightEnd + leftStart) / 2;
+    int rightStart = leftEnd + 1;
+    int size = rightEnd - leftStart + 1;
 
-    std::vector<int> merged; // Initializes an empty vector to store the merged result
+    int left = leftStart;
+    int right = rightStart;
+    int index = leftStart;
 
-    int leftIndex = 0, rightIndex = 0; // leftIndex for left vector, rightIndex for right vector
-
-    // Merge elements from left and right vectors in sorted order
-    while (leftIndex < leftSize && rightIndex < rightSize) {
-        if (left[leftIndex] <= right[rightIndex]) {
-            merged.push_back(left[leftIndex]);
-            leftIndex++;
+    while (left <= leftEnd && right <= rightEnd) {
+        if (inputVector[left] <= inputVector[right]) {
+            temp[index] = inputVector[left];
+            left++;
         } else {
-            merged.push_back(right[rightIndex]);
-            rightIndex++;
+            temp[index] = inputVector[right];
+            right++;
         }
+        index++;
     }
 
-    // If there are remaining elements in right vector, add them to the result
-    while (rightIndex < rightSize) {
-        merged.push_back(right[rightIndex]);
-        rightIndex++;
-    }
-
-    // If there are remaining elements in left vector, add them to the result
-    while (leftIndex < leftSize) {
-        merged.push_back(left[leftIndex]);
-        leftIndex++;
-    }
-
-    return merged;
+    std::copy(inputVector.begin() + left, inputVector.begin() + leftEnd + 1, temp.begin() + index);
+    std::copy(inputVector.begin() + right, inputVector.begin() + rightEnd + 1, temp.begin() + index);
+    std::copy(temp.begin() + leftStart, temp.begin() + leftStart + size, inputVector.begin() + leftStart);
 }
 
-std::vector<int> MergeSort(std::vector<int>& inputVector) {
-
-    int vectorSize = inputVector.size();
-
-    if (vectorSize <= 1) {
-        return inputVector;
+void MergeSort(std::vector<int>& inputVector, std::vector<int>& temp, int leftStart, int rightEnd) {
+    if (leftStart >= rightEnd) {
+        return;
     }
 
-    std::vector<int> leftHalf(inputVector.begin(), inputVector.begin() + vectorSize / 2);
-    std::vector<int> rightHalf(inputVector.begin() + vectorSize / 2, inputVector.end());
+    int middle = (leftStart + rightEnd) / 2;
+    MergeSort(inputVector, temp, leftStart, middle);
+    MergeSort(inputVector, temp, middle + 1, rightEnd);
+    Merge(inputVector, temp, leftStart, rightEnd);
+}
 
-    return Merge(MergeSort(leftHalf), MergeSort(rightHalf));
+void MergeSort(std::vector<int>& inputVector) {
+    std::vector<int> temp(inputVector.size());
+    MergeSort(inputVector, temp, 0, inputVector.size() - 1);
 }
 
 void writeResult(double executionTime, std::string fileName, std::string resultPath) {
@@ -68,7 +61,7 @@ void writeResult(double executionTime, std::string fileName, std::string resultP
 
 int main(int argc, char *argv[]) {
     // Default values
-    std::string filePath = "../../Dataset/1000k_parc_ordenado.txt";
+    std::string filePath = "../../Dataset/1000k_decreasing.txt";
     std::string resultPath = "../../Results/MergeSort.txt";
 
     size_t maxSize = 1000000;
@@ -103,21 +96,14 @@ int main(int argc, char *argv[]) {
     }
     datasetFile.close();
 
-	std::vector<int> ordered;
-
 	auto startTime = std::chrono::high_resolution_clock::now();
 
-	ordered = MergeSort(numbers);
+	MergeSort(numbers);
 
 	auto endTime = std::chrono::high_resolution_clock::now();
 
     auto executionTime = std::chrono::duration<double, std::milli>(endTime - startTime);
     std::cout << "Execution time: " << std::fixed << executionTime.count() << " milliseconds" << std::endl;
-    
-	// int tam = ordered.size();
-	// for (int i = 0; i < tam; i++) {
-	// 	std::cout << ordered[i] << std::endl;
-	// }
 
     writeResult(executionTime.count(), filePath.c_str(), resultPath.c_str());
 

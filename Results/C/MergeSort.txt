@@ -1,60 +1,60 @@
 Running MergeSort test with 1k_parc_ordenado dataset
 Execution time: 0.000000 ms
-Execution time: 0.000000 ms
+Execution time: 1.000000 ms
 Execution time: 0.000000 ms
 Running MergeSort test with 10k_parc_ordenado dataset
 Execution time: 2.000000 ms
 Execution time: 1.000000 ms
-Execution time: 1.000000 ms
+Execution time: 2.000000 ms
 Running MergeSort test with 100k_parc_ordenado dataset
 Execution time: 12.000000 ms
-Execution time: 12.000000 ms
+Execution time: 14.000000 ms
 Execution time: 12.000000 ms
 Running MergeSort test with 500k_parc_ordenado dataset
-Execution time: 58.000000 ms
-Execution time: 55.000000 ms
 Execution time: 57.000000 ms
+Execution time: 57.000000 ms
+Execution time: 63.000000 ms
 Running MergeSort test with 1000k_parc_ordenado dataset
-Execution time: 110.000000 ms
-Execution time: 109.000000 ms
+Execution time: 111.000000 ms
+Execution time: 113.000000 ms
 Execution time: 110.000000 ms
 Running MergeSort test with 1k_decreasing size
 Execution time: 0.000000 ms
-Execution time: 1.000000 ms
+Execution time: 0.000000 ms
 Execution time: 0.000000 ms
 Running MergeSort test with 1k_random size
-Execution time: 0.000000 ms
+Execution time: 1.000000 ms
 Execution time: 0.000000 ms
 Execution time: 0.000000 ms
 Running MergeSort test with 10k_decreasing size
-Execution time: 1.000000 ms
 Execution time: 2.000000 ms
 Execution time: 1.000000 ms
+Execution time: 2.000000 ms
 Running MergeSort test with 10k_random size
 Execution time: 1.000000 ms
-Execution time: 2.000000 ms
+Execution time: 1.000000 ms
 Execution time: 2.000000 ms
 Running MergeSort test with 100k_decreasing size
-Execution time: 11.000000 ms
-Execution time: 13.000000 ms
+Execution time: 12.000000 ms
+Execution time: 12.000000 ms
 Execution time: 12.000000 ms
 Running MergeSort test with 100k_random size
 Execution time: 14.000000 ms
-Execution time: 14.000000 ms
-Execution time: 14.000000 ms
+Execution time: 15.000000 ms
+Execution time: 15.000000 ms
 Running MergeSort test with 500k_decreasing size
-Execution time: 54.000000 ms
-Execution time: 56.000000 ms
+Execution time: 55.000000 ms
+Execution time: 57.000000 ms
 Execution time: 56.000000 ms
 Running MergeSort test with 500k_random size
-Execution time: 70.000000 ms
+Execution time: 69.000000 ms
 Execution time: 69.000000 ms
 Execution time: 69.000000 ms
 Running MergeSort test with 1000k_decreasing size
 Execution time: 108.000000 ms
 Execution time: 108.000000 ms
-Execution time: 107.000000 ms
+Execution time: 108.000000 ms
 Running MergeSort test with 1000k_random size
 Execution time: 140.000000 ms
-Execution time: 138.000000 ms
-Execution time: 140.000000 ms
+Execution time: 136.000000 ms
+Execution time: 141.000000 ms

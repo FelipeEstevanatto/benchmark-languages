@@ -1,15 +1,60 @@
 Running InsertionSort test with 1k_parc_ordenado dataset
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
 Running InsertionSort test with 10k_parc_ordenado dataset
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Execution time: 1.001000 ms
 Running InsertionSort test with 100k_parc_ordenado dataset
+Execution time: 3.005000 ms
+Execution time: 3.001000 ms
+Execution time: 3.001000 ms
 Running InsertionSort test with 500k_parc_ordenado dataset
+Execution time: 72.537000 ms
+Execution time: 72.598000 ms
+Execution time: 73.054000 ms
 Running InsertionSort test with 1000k_parc_ordenado dataset
+Execution time: 290.405000 ms
+Execution time: 290.317000 ms
+Execution time: 290.855000 ms
 Running InsertionSort test with 1k_decreasing size
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
 Running InsertionSort test with 1k_random size
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
+Execution time: 0.000000 ms
 Running InsertionSort test with 10k_decreasing size
+Execution time: 23.001000 ms
+Execution time: 23.044000 ms
+Execution time: 22.997000 ms
 Running InsertionSort test with 10k_random size
+Execution time: 11.006000 ms
+Execution time: 11.997000 ms
+Execution time: 10.999000 ms
 Running InsertionSort test with 100k_decreasing size
+Execution time: 2349.831000 ms
+Execution time: 2328.007000 ms
+Execution time: 2348.531000 ms
 Running InsertionSort test with 100k_random size
+Execution time: 1168.231000 ms
+Execution time: 1169.720000 ms
+Execution time: 1170.572000 ms
 Running InsertionSort test with 500k_decreasing size
+Execution time: 58463.207000 ms
+Execution time: 58285.560000 ms
+Execution time: 58338.765000 ms
 Running InsertionSort test with 500k_random size
+Execution time: 29057.102000 ms
+Execution time: 29109.700000 ms
+Execution time: 29049.089000 ms
 Running InsertionSort test with 1000k_decreasing size
+Execution time: 232934.220000 ms
+Execution time: 236310.734000 ms
+Execution time: 234606.050000 ms
 Running InsertionSort test with 1000k_random size
+Execution time: 116805.894000 ms
+Execution time: 116806.417000 ms
+Execution time: 117265.779000 ms
